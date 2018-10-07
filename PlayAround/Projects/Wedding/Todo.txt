@@ -1,0 +1,18 @@
+﻿TODO for 2018-09-02:
+
+- Create Zone File (based on Google DOC JSON Structure)   [DONE]
+- Create simple textures - Hannah has the power and skillz [DONE]
+- Make/Update classes to represent new JSON structure [DONE]
+
+
+TODO for 2018-09-09:
+- Quickbar
+- Inventory (fill quickbar with object)
+- Basic combat (?)
+
+
+
+
+[][][][][]
+[][][][][][][][][]
+

@@ -1,0 +1,48 @@
+{
+  "Description": "Introductory forest which player begins in. Should contain basics needed for Fishing & Cooking",
+  "EXITS": [
+    {
+      "Id": 1,
+      "TextureID": 5,
+      "Position": "200, 200",
+      "ZoneId": 2,
+      "Name": "To The Tunnel"
+    }
+  ],
+  "Height": 1000,
+  "Id": 1,
+  "Name": "Forest",
+  "NPCS": [
+    {
+      "DefaultDialogue": "Hello there!",
+      "Id": 1,
+      "TextureID": 4,
+      "Position": "200, 100",
+      "Name": "Jim"
+    },
+    {
+      "DefaultDialogue": "General Kenobi!",
+      "Id": 2,
+      "TextureID": 4,
+      "Position": "250, 100",
+      "Name": "James"
+    },
+    {
+      "DefaultDialogue": "Pleasant day!",
+      "Id": 3,
+      "TextureID": 4,
+      "Position": "500, 400",
+      "Name": "John"
+    }
+  ],
+  "OBJECTS": [
+    {
+      "Id": 1,
+      "TextureID": 3,
+      "Position": "100, 100",
+      "Name": "Tree1"
+    }
+  ],
+  "TextureID": 2, // Background?
+  "Width": 1000
+}

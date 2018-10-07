@@ -1,0 +1,34 @@
+[
+  {
+    "Id": 1,
+    "ImageName": "playerSpriteSheet"
+  },
+  {
+    "Id": 2,
+    "ImageName": "zoneOneTemp"
+  },
+  {
+    "Id": 3,
+    "ImageName": "objectTemp"
+  },
+  {
+    "Id": 4,
+    "ImageName": "npcTemp"
+  },
+  {
+    "Id": 5,
+    "ImageName": "exitTemp"
+  },
+  {
+    "Id": 6,
+    "ImageName": "BlueSword"
+  },
+  {
+    "Id": 7,
+    "ImageName": "QuickBarBox"
+  },
+  {
+    "Id": 8,
+    "ImageName": "ring"
+  }
+]
