@@ -43,6 +43,8 @@ Register person |  |
 Guests |  |
 
 ### Backgrounds
+Item | Investigating | Status 
+--- | --- | ---
 Bar |  |
 Alter room/aisle |  |
 Disco |  |
