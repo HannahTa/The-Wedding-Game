@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27703.2035
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSONBuilder", "PlayAround\Projects\JSONBuilder\JSONBuilder.csproj", "{E8D7C7D8-C6F2-4740-880D-44516F923B51}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayAround", "PlayAround\Projects\Wedding\PlayAround.csproj", "{84D7FC69-EA3B-4C30-BFC0-CCAF793DDAC2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LevelEditor", "PlayAround\Projects\LevelEditor\LevelEditor.csproj", "{22100BDD-6E6F-4DF2-8580-9236C0F0EB70}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,12 @@ Global
 		{84D7FC69-EA3B-4C30-BFC0-CCAF793DDAC2}.Release|Any CPU.ActiveCfg = Release|x86
 		{84D7FC69-EA3B-4C30-BFC0-CCAF793DDAC2}.Release|x86.ActiveCfg = Release|x86
 		{84D7FC69-EA3B-4C30-BFC0-CCAF793DDAC2}.Release|x86.Build.0 = Release|x86
+		{22100BDD-6E6F-4DF2-8580-9236C0F0EB70}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{22100BDD-6E6F-4DF2-8580-9236C0F0EB70}.Debug|x86.ActiveCfg = Debug|x86
+		{22100BDD-6E6F-4DF2-8580-9236C0F0EB70}.Debug|x86.Build.0 = Debug|x86
+		{22100BDD-6E6F-4DF2-8580-9236C0F0EB70}.Release|Any CPU.ActiveCfg = Release|x86
+		{22100BDD-6E6F-4DF2-8580-9236C0F0EB70}.Release|x86.ActiveCfg = Release|x86
+		{22100BDD-6E6F-4DF2-8580-9236C0F0EB70}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
