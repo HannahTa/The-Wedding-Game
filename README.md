@@ -76,3 +76,17 @@ Flower |  |
 - Lightsaber
 - Keyblade
 - Thor's Hammer
+
+### Level Editor
+Task | Investigating | Status
+--- | --- | ---
+Drag and Drop |  |
+Consolidate Content folder |  |
+'free' mode |  |
+Return to Origin button |  |
+Basic JSON export |  |
+Select and edit object propertys |  |
+Buttons! |  |
+Discuss appropriate JSON format |  |
+Screen Grid |  |
+Define Sprite type |  |
