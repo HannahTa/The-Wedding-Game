@@ -9,10 +9,10 @@ namespace LevelEditor
 {
     class Camera2D : GameComponent
     {
-        protected float _zoom; // Camera Zoom
-        public Matrix _transform; // Matrix Transform
-        public Vector2 _pos; // Camera Position
-        protected float _rotation; // Camera Rotation
+        protected float _zoom; 
+        public Matrix _transform; 
+        public Vector2 _pos; 
+        protected float _rotation; 
 
         public Camera2D(Game game) : base(game)
         {
@@ -21,11 +21,10 @@ namespace LevelEditor
             _pos = Vector2.Zero;
         }
 
-        // Sets and gets zoom
         public float Zoom
         {
             get { return _zoom; }
-            set { _zoom = value; if (_zoom < 0.1f) _zoom = 0.1f; } // Negative zoom will flip image
+            set { _zoom = value; if (_zoom < 0.1f) _zoom = 0.1f; } 
         }
 
         public float Rotation
@@ -34,12 +33,11 @@ namespace LevelEditor
             set { _rotation = value; }
         }
 
-        // Auxiliary function to move the camera
         public void Move(Vector2 amount)
         {
             _pos += amount;
         }
-        // Get set position
+
         public Vector2 Pos
         {
             get { return _pos; }
@@ -48,7 +46,7 @@ namespace LevelEditor
 
         public Matrix get_transformation(GraphicsDevice graphicsDevice)
         {
-            _transform =       // Thanks to o KB o for this solution
+            _transform =      
               Matrix.CreateTranslation(new Vector3(-_pos.X, -_pos.Y, 0)) *
                                          Matrix.CreateRotationZ(Rotation) *
                                          Matrix.CreateScale(_zoom);
