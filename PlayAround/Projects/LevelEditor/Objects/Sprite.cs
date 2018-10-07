@@ -13,14 +13,17 @@ namespace LevelEditor
     {
         public Vector2 Position { get; set; }
         public Texture2D Texture { get; set; }
+        public Rectangle CollisionBox { get; set; }
         public int TextureID { get; set; }
         public bool Delete { get; set; }
+        public bool Selected { get; set; }
 
-        public Sprite(Game game, Vector2 position, Texture2D texture, int textureID, int width, int height) : base(game)
+        public Sprite(Game game, Vector2 position, Rectangle collisionBox, Texture2D texture, int textureID) : base(game)
         {
             Position = position;
             Texture = texture;
             TextureID = textureID;
+            CollisionBox = collisionBox;
             Delete = false;
         }
     }

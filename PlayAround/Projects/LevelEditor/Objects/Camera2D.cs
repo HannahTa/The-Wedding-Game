@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace LevelEditor
 {
-    class Camera2D : GameComponent
+    public class Camera2D : GameComponent
     {
         protected float _zoom; 
         public Matrix _transform; 

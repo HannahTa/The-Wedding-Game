@@ -80,7 +80,7 @@ Flower |  |
 ### Level Editor
 Task | Investigating | Status
 --- | --- | ---
-Drag and Drop |  |
+Drag and Drop | Kyle | In Progress
 Consolidate Content folder |  |
 'free' mode |  |
 Return to Origin button |  |
@@ -90,3 +90,8 @@ Buttons! |  |
 Discuss appropriate JSON format |  |
 Screen Grid |  |
 Define Sprite type |  |
+
+### Level Editor bug list
+- Camera movement seems to manipulate the cursor position slightly.
+- Drag and drop is not very reliable, it seems to 'slip' off the cursor.
+- Can't seem to differentiate between holding down a mouse button and just pressing it.
