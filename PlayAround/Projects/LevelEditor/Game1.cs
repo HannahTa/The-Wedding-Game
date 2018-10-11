@@ -25,6 +25,9 @@ namespace LevelEditor
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            IsMouseVisible = false; // Might come in handy for you!
+
             cam = new Camera2D(this)
             {
                 Pos = new Vector2(0.0f, 0.0f)
@@ -41,7 +44,7 @@ namespace LevelEditor
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Texture[] json = JsonConvert.DeserializeObject<Texture[]>(File.ReadAllText("Content/JSON/Texture.json"));
+            Texture[] json = JsonConvert.DeserializeObject<Texture[]>(File.ReadAllText("Content/JSONs/Texture.json"));
             dir = new System.IO.DirectoryInfo("Content");
             textures = new Dictionary<int, Texture2D>();
             foreach (Texture tex in json)
@@ -76,7 +79,8 @@ namespace LevelEditor
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, null, null, cam.get_transformation(GraphicsDevice));
+            // Changed from Immeditate to BackToFront so Z value is relevant. I got ya back homie <3
+            spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, null, null, null, null, cam.get_transformation(GraphicsDevice));
             foreach (var block in blocks)
             {
                 block.Draw(spriteBatch);

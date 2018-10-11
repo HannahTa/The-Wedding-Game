@@ -11,6 +11,7 @@ This is a work in progress to-do list. If something is missing or needs to be ad
 ## Mechanics
 Item | Investigating | Status 
 --- | --- | ---
+Main Menu | Josh | To Do
 Inventory |  |  To Do
 Quests (Kill X, Collect Y) |  | To Do
 Complete Action Bar |  | To Do
@@ -89,7 +90,7 @@ Flower |  | To Do
 Task | Investigating | Status
 --- | --- | ---
 Drag and Drop | Kyle | In Progress
-Consolidate Content folder |  | To Do
+Consolidate Content folder | Josh | Done!
 'free' mode |  | To Do
 Return to Origin button |  | To Do
 Basic JSON export |  | To Do

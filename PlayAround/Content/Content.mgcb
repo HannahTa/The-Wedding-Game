@@ -145,3 +145,33 @@
 /processorParam:TextureFormat=Color
 /build:ring.png
 
+#begin Enemy.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Enemy.png
+
+#begin JSONs/Texture.json
+/copy:JSONs/Texture.json
+
+#begin JSONs/NPCs.json
+/copy:JSONs/NPCs.json
+
+#begin JSONs/Player.json
+/copy:JSONs/Player.json
+
+#begin JSONs/Sample.json
+/copy:JSONs/Sample.json
+
+#begin JSONs/World.json
+/copy:JSONs/World.json
+
+#begin JSONs/Zone1.json
+/copy:JSONs/Zone1.json
+

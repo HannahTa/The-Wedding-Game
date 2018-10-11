@@ -39,11 +39,11 @@ namespace PlayAround
             SpriteLoader.LoadTextures(Content);
             // Populate Objects - BLOCK OF CODE BELOW IS UNIQUE TO EACH JSON FILE
             /// Player
-            _player = JsonConvert.DeserializeObject<Player>(File.ReadAllText("JSONs/Player.json"));
+            _player = JsonConvert.DeserializeObject<Player>(File.ReadAllText("Content/JSONs/Player.json"));
             Camera.Focus = _player;
             Components.Add(_player);
             /// Zones (Objects, etc)
-            _zoneOne = JsonConvert.DeserializeObject<Zone>(File.ReadAllText("../../../../JSONs/Zone1.json"));
+            _zoneOne = JsonConvert.DeserializeObject<Zone>(File.ReadAllText("Content/JSONs/Zone1.json"));
         }
 
         protected override void UnloadContent()

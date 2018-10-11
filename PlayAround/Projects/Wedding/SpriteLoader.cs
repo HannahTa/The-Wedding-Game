@@ -12,7 +12,7 @@ namespace PlayAround
 
         public static void LoadTextures(ContentManager cnt)
         {
-            Texture[] jsonTextures = JsonConvert.DeserializeObject<Texture[]>(File.ReadAllText("../../../../JSONs/Texture.json"));
+            Texture[] jsonTextures = JsonConvert.DeserializeObject<Texture[]>(File.ReadAllText("Content/JSONs/Texture.json"));
             foreach (Texture tex in jsonTextures)
             {
                 textures.Add(tex.Id, cnt.Load<Texture2D>(tex.ImageName));

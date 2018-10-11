@@ -76,16 +76,10 @@
     <Content Include="Todo.txt" />
   </ItemGroup>
   <ItemGroup>
-    <MonoGameContentReference Include="Content\Content.mgcb" />
+    <MonoGameContentReference Include="..\..\Content\Content.mgcb">
+      <Link>Content.mgcb</Link>
+    </MonoGameContentReference>
     <None Include="app.manifest" />
-    <None Include="JSONs\NPCs.json" />
-    <None Include="JSONs\Player.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="JSONs\Sample.json" />
-    <None Include="JSONs\Texture.json" />
-    <None Include="JSONs\World.json" />
-    <None Include="JSONs\Zone1.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
