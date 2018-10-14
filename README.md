@@ -11,7 +11,7 @@ This is a work in progress to-do list. If something is missing or needs to be ad
 ## Mechanics
 Item | Investigating | Status 
 --- | --- | ---
-Main Menu | Josh | To Do
+Main Menu | Josh | 50%
 Inventory |  |  To Do
 Quests (Kill X, Collect Y) |  | To Do
 Complete Action Bar |  | To Do
@@ -55,7 +55,7 @@ Item | Investigating | Status
 --- | --- | ---
 Bar |  | To Do
 Alter room/aisle |  | To Do
-Disco |  |
+Disco |  | To Do
 Upstairs/Hotal rooms(?) |  | To Do
 
 ### Objects

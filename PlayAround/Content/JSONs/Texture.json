@@ -31,4 +31,8 @@
     "Id": 8,
     "ImageName": "ring"
   }
+  {
+    "Id": 999,
+    "ImageName": "MenuButtons"
+  }
 ]
