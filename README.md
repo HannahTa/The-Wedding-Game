@@ -62,7 +62,7 @@ Upstairs/Hotal rooms(?) |  | To Do
 Item | Investigating | Status 
 --- | --- | ---
 Alter(?) |  | To Do
-Chairs |  | To Do
+Chairs | Hannah | Review
 Tables |  | To Do
 Bar |  | To Do
 Disco ball |  | To Do
