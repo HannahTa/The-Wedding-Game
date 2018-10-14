@@ -8,6 +8,7 @@ namespace PlayAround
     {
         // Position?
         public Vector2 Position { get; set; }
+        private Vector2 OldPosition { get; set; }
         // Settings
         public string Name;
         public int TextureId;
@@ -34,6 +35,7 @@ namespace PlayAround
         // Movement Properties
         private readonly float WalkSpeed = 150;
         private readonly float RunSpeed = 200;
+        public bool CheckIfMovementCollision = false;
 
         public Player(Game game) : base(game)
         {
@@ -117,8 +119,15 @@ namespace PlayAround
                 elapsedTime = 0;
             }
             // Update new position
+            OldPosition = Position;
             Position = new Vector2(X, Y);
+            if (Position != OldPosition) CheckIfMovementCollision = true;
             base.Update(gameTime);// ?? It this alright
+        }
+
+        public void ResetPosition()
+        {
+            Position = OldPosition;
         }
 
         public void Draw(SpriteBatch sb, Camera2D camera)

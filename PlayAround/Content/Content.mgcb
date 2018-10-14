@@ -163,9 +163,6 @@
 #begin JSONs/NPCs.json
 /copy:JSONs/NPCs.json
 
-#begin JSONs/Player.json
-/copy:JSONs/Player.json
-
 #begin JSONs/Sample.json
 /copy:JSONs/Sample.json
 
@@ -198,4 +195,7 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:chair.png
+
+#begin JSONs/NewPlayer.json
+/copy:JSONs/NewPlayer.json
 
