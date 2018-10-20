@@ -1,38 +1,38 @@
 [
   {
     "Id": 1,
-    "ImageName": "playerSpriteSheet"
+    "ImageName": "Sprites/playerSpriteSheet"
   },
   {
     "Id": 2,
-    "ImageName": "zoneOneTemp"
+    "ImageName": "Sprites/zoneOneTemp"
   },
   {
     "Id": 3,
-    "ImageName": "objectTemp"
+    "ImageName": "Sprites/objectTemp"
   },
   {
     "Id": 4,
-    "ImageName": "npcTemp"
+    "ImageName": "Sprites/npcTemp"
   },
   {
     "Id": 5,
-    "ImageName": "exitTemp"
+    "ImageName": "Sprites/exitTemp"
   },
   {
     "Id": 6,
-    "ImageName": "BlueSword"
+    "ImageName": "Sprites/BlueSword"
   },
   {
     "Id": 7,
-    "ImageName": "QuickBarBox"
+    "ImageName": "Sprites/QuickBarBox"
   },
   {
     "Id": 8,
-    "ImageName": "ring"
+    "ImageName": "Sprites/ring"
   },
   {
     "Id": 999,
-    "ImageName": "MenuButtons"
+    "ImageName": "Sprites/MenuButtons"
   }
 ]
