@@ -7,5 +7,6 @@ namespace PlayAround
     {
         public int Id;
         public int ZoneId;
+        public Rectangle source;
     }
 }

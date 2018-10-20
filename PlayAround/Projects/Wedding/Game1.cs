@@ -56,12 +56,11 @@ namespace PlayAround
             IsMouseVisible = false;
             // In-Game Updates
             // Populate Objects - BLOCK OF CODE BELOW IS UNIQUE TO EACH JSON FILE
-            // Player
-            _player = JsonConvert.DeserializeObject<Player>(File.ReadAllText("Content/JSONs/Player.json"));
             Camera.Focus = _player;
             Components.Add(_player);
             // Zones (Objects, etc)
             _zoneOne = JsonConvert.DeserializeObject<Zone>(File.ReadAllText("Content/JSONs/Zone1.json"));
+            _zoneOne.SetSources();
             // Update State
             GameState = GameStates.GAME;
         }
@@ -92,15 +91,20 @@ namespace PlayAround
             int action = menu.Update();
             switch(action)
             {
+                // New Game
                 case 1:
-                    // New Game
-                    break;
-                case 2:
+                    _player = JsonConvert.DeserializeObject<Player>(File.ReadAllText("Content/JSONs/NewPlayer.json"));
                     LoadInGame();
                     break;
-                case 3:
-                    // Options
+                // Load Game
+                case 2:
+                    _player = JsonConvert.DeserializeObject<Player>(File.ReadAllText("Content/JSONs/Player.json"));
+                    LoadInGame();
                     break;
+                // Options
+                case 3:
+                    break;
+                // Exit Game
                 case 4:
                     Exit();
                     break;
@@ -111,11 +115,9 @@ namespace PlayAround
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
+                // Save then exit game
                 var playerData = JsonConvert.SerializeObject(_player, Formatting.Indented);
-                if (File.Exists("JSONs/Player.json")) //File.Exists
-                {
-                    File.WriteAllText("JSONs/Player.json", playerData);
-                }
+                File.WriteAllText("Content/JSONs/Player.json", playerData);
                 Exit();
             }
             _zoneOne.Update(_player, Camera);

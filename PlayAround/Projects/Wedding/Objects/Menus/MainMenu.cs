@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
+using System.IO;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace PlayAround
@@ -23,7 +24,8 @@ namespace PlayAround
             MouseState pos = Mouse.GetState();
             for(int i = 0; i < buttons.Count; i++)
             {
-                if (Collision.CheckCollision(buttons[i].source, new Rectangle(pos.X, pos.Y, 1, 1)))
+                if (i == 1 && !File.Exists("Content/JSONs/Player.json")) buttons[i].YFrame = 1; // Do Nothing
+                else if (Collision.CheckCollision(buttons[i].source, new Rectangle(pos.X, pos.Y, 1, 1)))
                 {
                     if (pos.LeftButton == ButtonState.Pressed) return (i+1);
                     else buttons[i].YFrame = 1;

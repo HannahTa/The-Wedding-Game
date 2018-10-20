@@ -6,5 +6,6 @@ namespace PlayAround
     public class Object : BaseDraw
     {
         public int Id;
+        public Rectangle source;
     }
 }
