@@ -63,7 +63,7 @@ Item | Investigating | Status
 --- | --- | ---
 Alter(?) |  | To Do
 Chairs | Hannah | Review
-Tables |  | To Do
+Tables | Hannah | Review
 Bar |  | To Do
 Disco ball |  | To Do
 Cake |  | To Do
