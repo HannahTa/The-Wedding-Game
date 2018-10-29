@@ -1,8 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.IO;
+using Newtonsoft.Json;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Newtonsoft.Json;
-using System.IO;
 
 namespace PlayAround
 {
@@ -98,7 +98,7 @@ namespace PlayAround
                     break;
                 // Load Game
                 case 2:
-                    _player = JsonConvert.DeserializeObject<Player>(File.ReadAllText("Content/JSONs/Player.json"));
+                    LoadSaveData(JsonConvert.DeserializeObject<SaveData>(File.ReadAllText("Content/JSONs/SaveData.json")));
                     LoadInGame();
                     break;
                 // Options
@@ -116,11 +116,38 @@ namespace PlayAround
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 // Save then exit game
-                var playerData = JsonConvert.SerializeObject(_player, Formatting.Indented);
-                File.WriteAllText("Content/JSONs/Player.json", playerData);
+                var saveData = JsonConvert.SerializeObject(GetSaveData(), Formatting.Indented);
+                File.WriteAllText("Content/JSONs/SaveData.json", saveData);
                 Exit();
             }
             _zoneOne.Update(_player, Camera);
+        }
+
+        private SaveData GetSaveData()
+        {
+            SaveData saveData = new SaveData();
+            saveData.PlayerPosition = _player.Position;
+            saveData.PlayerWidth = _player.Width;
+            saveData.PlayerHeight = _player.Height;
+            saveData.ActiveQuests = QuestTracker.ActiveQuests;
+            saveData.CompletedQuests = QuestTracker.CompletedQuests;
+            saveData.IncompletedQuests = QuestTracker.IncompletedQuests;
+            saveData.QuickBar = QuickBar.items;
+            saveData.Inventory = Inventory.items;
+            return saveData;
+        }
+
+        private void LoadSaveData(SaveData saveData)
+        {
+            _player = new Player(this);
+            _player.Position = saveData.PlayerPosition;
+            _player.Width = saveData.PlayerWidth;
+            _player.Height = saveData.PlayerHeight;
+            QuestTracker.ActiveQuests = saveData.ActiveQuests;
+            QuestTracker.CompletedQuests = saveData.CompletedQuests;
+            QuestTracker.IncompletedQuests = saveData.IncompletedQuests;
+            QuickBar.items = saveData.QuickBar;
+            Inventory.items = saveData.Inventory;
         }
 
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
@@ -139,6 +166,8 @@ namespace PlayAround
                     spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, null, null, null, null, Camera.Transform);
                     _player.Draw(spriteBatch, Camera);
                     _zoneOne.Draw(spriteBatch, (int)_player.Position.Y, Camera);
+                    QuickBar.Draw(spriteBatch, Camera);
+                    Inventory.Draw(spriteBatch, Camera);
                     break;
             }
             // Finishing drawing new frame

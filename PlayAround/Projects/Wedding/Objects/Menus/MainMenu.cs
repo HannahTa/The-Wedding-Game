@@ -24,7 +24,7 @@ namespace PlayAround
             MouseState pos = Mouse.GetState();
             for(int i = 0; i < buttons.Count; i++)
             {
-                if (i == 1 && !File.Exists("Content/JSONs/Player.json")) buttons[i].YFrame = 1; // Do Nothing
+                if (i == 1 && !File.Exists("Content/JSONs/SaveData.json")) buttons[i].YFrame = 1; // Do Nothing
                 else if (Collision.CheckCollision(buttons[i].source, new Rectangle(pos.X, pos.Y, 1, 1)))
                 {
                     if (pos.LeftButton == ButtonState.Pressed) return (i+1);

@@ -4,28 +4,28 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace PlayAround
 {
-    public class QuickBar
+    public static class QuickBar
     {
-        private List<Item> items = new List<Item>();
-        private int selectedPos = 1;
-        private int X;
-        private readonly int Y = 400;
-        private readonly int size = 50;
-        private readonly int dist = 5;
+        public static List<Item> items = new List<Item>();
+        public static int selectedPos = 1;
+        private static int X;
+        private static readonly int Y = 400;
+        private static readonly int size = 50;
+        private static readonly int dist = 5;
 
-        public void AddItem(int ItemType)
+        public static void AddItem(int ItemType)
         {
             //switch (ItemType)
             items.Add(new BlueSword(105, Y + 5));
             // Item X & Y determined by position in Inventory
         }
 
-        public void SelectItem(int pos)
+        public static void SelectItem(int pos)
         {
             selectedPos = pos;
         }
 
-        public void Draw(SpriteBatch sb, Camera2D camera)
+        public static void Draw(SpriteBatch sb, Camera2D camera)
         {
             for (int i = 0; i < 10; i++)
             {

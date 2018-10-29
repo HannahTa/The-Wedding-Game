@@ -12,8 +12,6 @@ namespace PlayAround
         // Settings
         public string Name;
         public int TextureId;
-        private readonly QuickBar quickBar = new QuickBar();
-        private readonly Inventory inventory = new Inventory();
         // Combat Properties
         private Rectangle attackBox;
         public bool CheckIfAttackConnected = false;
@@ -40,9 +38,6 @@ namespace PlayAround
         public Player(Game game) : base(game)
         {
             TextureId = 1;
-            // Added below for testing purposes
-            quickBar.AddItem(1);
-            inventory.AddItem(1);
         }
 
         public override void Update(GameTime gameTime)
@@ -74,7 +69,7 @@ namespace PlayAround
                 X -= (speed * delta);
                 direction = Directions.LEFT;
             }
-            inventory.Update();
+            Inventory.Update();
             // Combat
             var mouseState = Mouse.GetState();
             if (mouseState.LeftButton == ButtonState.Pressed)
@@ -122,7 +117,7 @@ namespace PlayAround
             OldPosition = Position;
             Position = new Vector2(X, Y);
             if (Position != OldPosition) CheckIfMovementCollision = true;
-            base.Update(gameTime);// ?? It this alright
+            base.Update(gameTime); // ?? It this alright
         }
 
         public void ResetPosition()
@@ -135,8 +130,6 @@ namespace PlayAround
             Texture2D texture = SpriteLoader.GetTexture(TextureId);
             sb.Draw(texture, new Rectangle((int)Position.X, (int)Position.Y, Width, Height), new Rectangle(Width * frame, Height * frameRow, Width, Height), Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.5f);
             sb.Draw(texture, attackBox, new Rectangle(Width, Height, Width, Height), Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.5f); // Debugging purposes
-            quickBar.Draw(sb, camera);
-            inventory.Draw(sb, camera);
         }
 
         public Rectangle GetAttackBox()

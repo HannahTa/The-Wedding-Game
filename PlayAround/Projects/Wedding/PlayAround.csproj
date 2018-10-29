@@ -46,6 +46,8 @@
     <Compile Include="Objects\Functionality\Camera.cs" />
     <Compile Include="Objects\Menus\Button.cs" />
     <Compile Include="Objects\Menus\MainMenu.cs" />
+    <Compile Include="Objects\Functionality\Quest.cs" />
+    <Compile Include="Objects\Functionality\SaveData.cs" />
     <Compile Include="Static Classes\Collision.cs" />
     <Compile Include="Objects\Zone\Exit.cs" />
     <Compile Include="Game1.cs" />
@@ -57,6 +59,7 @@
     <Compile Include="Objects\Player\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Static Classes\QuestTracker.cs" />
     <Compile Include="Static Classes\SpriteLoader.cs" />
     <Compile Include="Objects\Texture.cs" />
     <Compile Include="Objects\Zone\Zone.cs" />

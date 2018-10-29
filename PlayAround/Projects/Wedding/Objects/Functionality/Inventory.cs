@@ -5,39 +5,34 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace PlayAround
 {
-    public class Inventory
+    public static class Inventory
     {
-        private List<Item> items = new List<Item>();
-        private bool visible;
-        private bool ePressed = false;
-        private int X;
-        private readonly int Y = 100;
-        private readonly int size = 50;
-        private readonly int dist = 5;
+        public static List<Item> items = new List<Item>();
+        private static bool visible = false;
+        private static bool ePressed = false;
+        private static int X;
+        private static readonly int Y = 100;
+        private static readonly int size = 50;
+        private static readonly int dist = 5;
 
-        public Inventory()
-        {
-            visible = false;
-        }
-
-        public void AddItem(int ItemType)
+        public static void AddItem(int ItemType)
         {
             //switch (ItemType)
             items.Add(new BlueSword(105, Y + 5));
             // Item X & Y determined by position in Inventory
         }
 
-        public void ShowInventory()
+        public static void ShowInventory()
         {
             visible = true;
         }
 
-        public void HideInventory()
+        public static void HideInventory()
         {
             visible = false;
         }
 
-        public void Update()
+        public static void Update()
         {
             var keyState = Keyboard.GetState();
             if (keyState.IsKeyDown(Keys.E) && !ePressed)
@@ -49,7 +44,7 @@ namespace PlayAround
             else if (keyState.IsKeyUp(Keys.E)) ePressed = false;
         }
 
-        public void Draw(SpriteBatch sb, Camera2D camera)
+        public static void Draw(SpriteBatch sb, Camera2D camera)
         {
             if (visible)
             {

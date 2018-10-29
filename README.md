@@ -12,8 +12,8 @@ This is a work in progress to-do list. If something is missing or needs to be ad
 Item | Investigating | Status 
 --- | --- | ---
 Main Menu | Josh | 50%
-Inventory |  |  To Do
-Quests (Kill X, Collect Y) |  | To Do
+Inventory | Josh/Hannah |  In Progress
+Quests (Kill X, Collect Y) | Josh | Done
 Complete Action Bar |  | To Do
 Load between zones |  | To Do
 Combat (Enemy Health, Knockback) |  | To Do
