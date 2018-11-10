@@ -44,7 +44,7 @@ namespace LevelEditor
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Texture[] json = JsonConvert.DeserializeObject<Texture[]>(File.ReadAllText("Content/JSONs/Texture.json"));
+            Texture[] json = JsonConvert.DeserializeObject<Texture[]>(File.ReadAllText("Content/JSON/Texture.json"));
             dir = new System.IO.DirectoryInfo("Content");
             textures = new Dictionary<int, Texture2D>();
             foreach (Texture tex in json)
