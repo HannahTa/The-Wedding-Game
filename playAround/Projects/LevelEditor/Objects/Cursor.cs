@@ -22,7 +22,7 @@ namespace LevelEditor.Objects
 
         public Cursor(Game game, Rectangle collisionBox, Texture2D texture, int textureID, Dictionary<int, Texture2D> textures, EventHandler add) : base(game, collisionBox, texture, textureID)
         {
-            Texture[] json = JsonConvert.DeserializeObject<Texture[]>(File.ReadAllText("JSONs/Texture.json"));
+            Texture[] json = JsonConvert.DeserializeObject<Texture[]>(File.ReadAllText("Content/JSONs/Texture.json"));
             dir = new System.IO.DirectoryInfo("Content");
             textureMax = json.Length;
             Textures = textures;

@@ -26,7 +26,7 @@ namespace LevelEditor
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            IsMouseVisible = false; // Might come in handy for you!
+            IsMouseVisible = true; // Might come in handy for you!
 
             cam = new Camera2D(this)
             {
@@ -44,7 +44,7 @@ namespace LevelEditor
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Texture[] json = JsonConvert.DeserializeObject<Texture[]>(File.ReadAllText("Content/JSON/Texture.json"));
+            Texture[] json = JsonConvert.DeserializeObject<Texture[]>(File.ReadAllText("Content/JSONs/Texture.json"));
             dir = new System.IO.DirectoryInfo("Content");
             textures = new Dictionary<int, Texture2D>();
             foreach (Texture tex in json)
@@ -105,9 +105,9 @@ namespace LevelEditor
             if (!overBlock)
             {
                 /*** Once I figure out the math here I will re-enable snap mode ***/
-                //int tileX = (int)((float)(mouseRectangle.X) / cursor.Textures[cursor.TextureID].Width) * cursor.Textures[cursor.TextureID].Width;
-                //int tileY = (int)((float)(mouseRectangle.Y) / cursor.Textures[cursor.TextureID].Height) * cursor.Textures[cursor.TextureID].Height;
-                blocks.Add(new Sprite(this, new Rectangle(cursor.CollisionBox.X, cursor.CollisionBox.Y, cursor.Textures[cursor.TextureID].Width, cursor.Textures[cursor.TextureID].Height), cursor.Textures[cursor.TextureID], cursor.TextureID));
+                int tileX = (int)((float)(cursor.CollisionBox.X) / cursor.Textures[cursor.TextureID].Width) * cursor.Textures[cursor.TextureID].Width;
+                int tileY = (int)((float)(cursor.CollisionBox.Y) / cursor.Textures[cursor.TextureID].Height) * cursor.Textures[cursor.TextureID].Height;
+                blocks.Add(new Sprite(this, new Rectangle(tileX, tileY, cursor.Textures[cursor.TextureID].Width, cursor.Textures[cursor.TextureID].Height), cursor.Textures[cursor.TextureID], cursor.TextureID));
                 blocks = blocks.OrderBy(x => x.Sequence).ToList();
             }
         }

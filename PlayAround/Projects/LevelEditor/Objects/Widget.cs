@@ -12,12 +12,13 @@ namespace LevelEditor.Objects
 {
     class Widget : SpriteComponent
     {
-        public int EventType { get; set; }
-        private Dictionary<int, Texture2D> widgetTextures;
 
-        public Widget(Game game, Rectangle collisionBox, Texture2D texture, int textureID, int eventType) : base(game, collisionBox, texture, textureID)
+        private Dictionary<int, Texture2D> widgetTextures;
+        public string EventType;
+
+        public Widget(Game game, Rectangle collisionBox, Texture2D texture, int textureID, string eventType) : base(game, collisionBox, texture, textureID)
         {
-            this.EventType = EventType;
+            this.EventType = eventType;
         }
     }
 }

@@ -15,6 +15,10 @@ namespace LevelEditor
         public EventHandler[] events;
         public List<Widget> widgets;
 
+        // Used for re-sizing Widgets
+        private string EventType = "";
+        private string calcType = ""; 
+
         public Sprite(Game game, Rectangle collisionBox, Texture2D texture, int textureID) : base(game, collisionBox, texture, textureID)
         {
             events = new EventHandler[4];
@@ -27,11 +31,11 @@ namespace LevelEditor
 
             widgets = new List<Widget>
             {
-                new Widget(game, new Rectangle(collisionBox.X - 8, collisionBox.Y - 8, 16, 16), Game.Content.Load<Texture2D>("editor/CornerWidget"), textureID, 1),
-                new Widget(game, new Rectangle(collisionBox.X - 8 + collisionBox.Width, collisionBox.Y - 8, 16, 16), Game.Content.Load<Texture2D>("editor/CornerWidget"), textureID, 1),
-                new Widget(game, new Rectangle(collisionBox.X - 8, collisionBox.Y + collisionBox.Height - 8, 16, 16), Game.Content.Load<Texture2D>("editor/CornerWidget"), textureID, 1),
-                new Widget(game, new Rectangle(collisionBox.X + collisionBox.Width - 8, collisionBox.Y + collisionBox.Height - 8, 16, 16), Game.Content.Load<Texture2D>("editor/CornerWidget"), textureID, 1),
-                new Widget(game, new Rectangle(collisionBox.X + (collisionBox.Width/2) - 8, collisionBox.Y + (collisionBox.Height/2) - 8, 16, 16), Game.Content.Load<Texture2D>("editor/CentreWidget"), textureID, 2)
+                new Widget(game, new Rectangle(collisionBox.X - 8, collisionBox.Y - 8, 16, 16), Game.Content.Load<Texture2D>("Sprites/editor/CornerWidget"), textureID, "Scale"),
+                new Widget(game, new Rectangle(collisionBox.X - 8 + collisionBox.Width, collisionBox.Y - 8, 16, 16), Game.Content.Load<Texture2D>("Sprites/editor/CornerWidget"), textureID, "Scale"),
+                new Widget(game, new Rectangle(collisionBox.X - 8, collisionBox.Y + collisionBox.Height - 8, 16, 16), Game.Content.Load<Texture2D>("Sprites/editor/CornerWidget"), textureID, "Scale"),
+                new Widget(game, new Rectangle(collisionBox.X + collisionBox.Width - 8, collisionBox.Y + collisionBox.Height - 8, 16, 16), Game.Content.Load<Texture2D>("Sprites/editor/CornerWidget"), textureID, "Scale"),
+                new Widget(game, new Rectangle(collisionBox.X + (collisionBox.Width/2) - 8, collisionBox.Y + (collisionBox.Height/2) - 8, 16, 16), Game.Content.Load<Texture2D>("Sprites/editor/CentreWidget"), textureID, "Move")
             };
         }
 
@@ -39,65 +43,81 @@ namespace LevelEditor
         {
             _previousMoseState = _currentMouseState;
             _currentMouseState = Mouse.GetState();
-            var mouseRectangle = new Rectangle(_currentMouseState.X + (int)cam.Pos.X, _currentMouseState.Y + (int)cam.Pos.Y, 10, 10);
-
-            _isHovering = false;
-
-            foreach (var widg in widgets)
+            // Calculations
+            if (!calcType.Equals(""))
             {
-                if(mouseRectangle.Intersects(widg.CollisionBox))
+                if (_currentMouseState.LeftButton == ButtonState.Released)
                 {
-                    widg.Selected = true;
-                } else
+                    calcType = "";
+                }
+                else 
                 {
-                    widg.Selected = false;
+                    if (EventType == "Move") { events[1]?.Invoke(this, new EventArgs()); }
+                    else if (EventType == "Scale") { events[3]?.Invoke(this, new EventArgs()); }
                 }
             }
-
-            if (mouseRectangle.Intersects(widgets[0].CollisionBox) || mouseRectangle.Intersects(widgets[1].CollisionBox) || mouseRectangle.Intersects(widgets[2].CollisionBox) || mouseRectangle.Intersects(widgets[3].CollisionBox))
+            else
             {
-                if (_currentMouseState.LeftButton == ButtonState.Pressed && _previousMoseState.LeftButton == ButtonState.Pressed)
-                {
-                    events[3]?.Invoke(this, new EventArgs());
-                }
-            } else if(mouseRectangle.Intersects(widgets[4].CollisionBox)) {
-                if (_currentMouseState.LeftButton == ButtonState.Pressed && _previousMoseState.LeftButton == ButtonState.Pressed)
-                {
-                    events[1]?.Invoke(this, new EventArgs());
-                }
-            } else if (mouseRectangle.Intersects(CollisionBox)) {
-                _isHovering = true;
+                var mouseRectangle = new Rectangle(_currentMouseState.X + (int)cam.Pos.X, _currentMouseState.Y + (int)cam.Pos.Y, 10, 10);
+                if (Selected)
+                {                    
+                    if (mouseRectangle.Intersects(CollisionBox))
+                    {
+                        if (_currentMouseState.LeftButton == ButtonState.Pressed)
+                        {
+                            foreach (var widg in widgets)
+                            {
+                                if (mouseRectangle.Intersects(widg.CollisionBox))
+                                {
+                                    // Calculations (+5 leeway to make selecting corner easier)
+                                    /// Width
+                                    if (mouseRectangle.X <= (CollisionBox.X+5)) calcType = "1";
+                                    else if (mouseRectangle.X >= (CollisionBox.X + CollisionBox.Width)) calcType = "3";
+                                    else calcType = "2";
+                                    /// Height
+                                    if (mouseRectangle.Y <= (CollisionBox.Y+5)) calcType += "a";
+                                    else if (mouseRectangle.Y >= (CollisionBox.Y + CollisionBox.Height)) calcType += "c";
+                                    else calcType += "b";
+                                    // Begin the calculations
+                                    EventType = widg.EventType;
 
-                if (_currentMouseState.LeftButton == ButtonState.Released && _previousMoseState.LeftButton == ButtonState.Pressed)
-                {
-                    if (!IsNew)
-                        events[0]?.Invoke(this, new EventArgs());
+                                    Console.WriteLine(calcType);
+                                }
+                            }
+                        }
+                        else if (_currentMouseState.RightButton == ButtonState.Pressed)
+                        {
+                            events[2]?.Invoke(this, new EventArgs());
+                        }
+                    }
+                    else if (_currentMouseState.LeftButton == ButtonState.Pressed) events[0]?.Invoke(this, new EventArgs());
                 }
-
-                if (_currentMouseState.RightButton == ButtonState.Released && _previousMoseState.RightButton == ButtonState.Pressed)
+                else
                 {
-                    events[2]?.Invoke(this, new EventArgs());
+                    if (mouseRectangle.Intersects(CollisionBox))
+                    {
+                        _isHovering = true;
+                        if (_currentMouseState.LeftButton == ButtonState.Released && _previousMoseState.LeftButton == ButtonState.Pressed)
+                        {
+                            //if (!IsNew)
+                                events[0]?.Invoke(this, new EventArgs());
+                        }
+                        if (_currentMouseState.RightButton == ButtonState.Released && _previousMoseState.RightButton == ButtonState.Pressed)
+                        {
+                            events[2]?.Invoke(this, new EventArgs());
+                        }
+                    }
                 }
             }
-
-            if (_currentMouseState.LeftButton == ButtonState.Released && _previousMoseState.LeftButton == ButtonState.Released && (IsHold || IsNew))
-            {
-                if (IsHold)
-                    IsHold = false;
-                else if (IsNew)
-                    IsNew = false;
-            }
-
-            WidgetUpdate();
         }
 
         public void WidgetUpdate()
         {
-            widgets[0].CollisionBox = new Rectangle(widgets[2].CollisionBox.X, widgets[1].CollisionBox.Y, 16, 16);
-            widgets[1].CollisionBox = new Rectangle(widgets[3].CollisionBox.X, widgets[0].CollisionBox.Y, 16, 16);
-            widgets[2].CollisionBox = new Rectangle(widgets[0].CollisionBox.X, widgets[3].CollisionBox.Y, 16, 16);
-            widgets[3].CollisionBox = new Rectangle(widgets[1].CollisionBox.X, widgets[2].CollisionBox.Y, 16, 16);
-            widgets[4].CollisionBox = new Rectangle((widgets[0].CollisionBox.X + widgets[1].CollisionBox.X) / 2, (widgets[0].CollisionBox.Y + widgets[2].CollisionBox.Y) / 2, 16, 16);
+            widgets[0].CollisionBox = new Rectangle(CollisionBox.X - 8, CollisionBox.Y - 8, 16, 16);
+            widgets[1].CollisionBox = new Rectangle(CollisionBox.X - 8 + CollisionBox.Width, CollisionBox.Y - 8, 16, 16);
+            widgets[2].CollisionBox = new Rectangle(CollisionBox.X - 8, CollisionBox.Y + CollisionBox.Height - 8, 16, 16);
+            widgets[3].CollisionBox = new Rectangle(CollisionBox.X + CollisionBox.Width - 8, CollisionBox.Y + CollisionBox.Height - 8, 16, 16);
+            widgets[4].CollisionBox = new Rectangle(CollisionBox.X + (CollisionBox.Width / 2) - 8, CollisionBox.Y + (CollisionBox.Height / 2) - 8, 16, 16);
         }
 
         public override void Draw(SpriteBatch sb)
@@ -154,42 +174,39 @@ namespace LevelEditor
 
         private void Sprite_Scale(object sender, EventArgs e)
         {
-            if (Selected)
+            // Get Dimensions
+            int x = CollisionBox.X;
+            int y = CollisionBox.Y;
+            int W = CollisionBox.Width;
+            int H = CollisionBox.Height;
+            int deltaX = _currentMouseState.X - _previousMoseState.X;
+            int deltaY = _currentMouseState.Y - _previousMoseState.Y;
+            // Calculate New Dimensions
+            if (calcType.Contains("1"))
             {
-                var deltaX = _currentMouseState.X - _previousMoseState.X;
-                var deltaY = _currentMouseState.Y - _previousMoseState.Y;
-                CollisionBox = new Rectangle(CollisionBox.X, CollisionBox.Y, CollisionBox.Width + deltaX, CollisionBox.Height + deltaY);
-                IsHold = true;
-
-                
-                if (widgets[0].Selected) // If the top left widget increase the Y of the top right widget, and the X of the bottom left widget
-                {
-                    widgets[0].CollisionBox = new Rectangle(widgets[0].CollisionBox.X + deltaX, widgets[0].CollisionBox.Y + deltaY, widgets[0].CollisionBox.Width, widgets[0].CollisionBox.Height);
-                    widgets[1].CollisionBox = new Rectangle(widgets[1].CollisionBox.X, widgets[0].CollisionBox.Y, widgets[1].CollisionBox.Width, widgets[1].CollisionBox.Height);
-                    widgets[2].CollisionBox = new Rectangle(widgets[0].CollisionBox.X, widgets[2].CollisionBox.Y, widgets[2].CollisionBox.Width, widgets[2].CollisionBox.Height);
-                }
-                else if (widgets[1].Selected) // If the top right widget increase the Y of the top left widget, and the X of the bottom right widget
-                {
-                    widgets[1].CollisionBox = new Rectangle(widgets[1].CollisionBox.X + deltaX, widgets[1].CollisionBox.Y + deltaY, widgets[1].CollisionBox.Width, widgets[1].CollisionBox.Height);
-                    widgets[0].CollisionBox = new Rectangle(widgets[0].CollisionBox.X, widgets[1].CollisionBox.Y, widgets[0].CollisionBox.Width, widgets[0].CollisionBox.Height);
-                    widgets[3].CollisionBox = new Rectangle(widgets[1].CollisionBox.X, widgets[3].CollisionBox.Y, widgets[3].CollisionBox.Width, widgets[3].CollisionBox.Height);
-                }
-                else if (widgets[2].Selected) // If the bottom left widget increase the Y of the bottom right widget, and the X of the top left widget
-                {
-                    widgets[2].CollisionBox = new Rectangle(widgets[2].CollisionBox.X + deltaX, widgets[2].CollisionBox.Y + deltaY, widgets[2].CollisionBox.Width, widgets[2].CollisionBox.Height);
-                    widgets[0].CollisionBox = new Rectangle(widgets[2].CollisionBox.X, widgets[0].CollisionBox.Y, widgets[0].CollisionBox.Width, widgets[0].CollisionBox.Height);
-                    widgets[3].CollisionBox = new Rectangle(widgets[3].CollisionBox.X, widgets[2].CollisionBox.Y, widgets[3].CollisionBox.Width, widgets[3].CollisionBox.Height);
-                }
-                else if (widgets[3].Selected) // If the bottom right widget increase the Y of the bottom left widget, and the X of the top right widget
-                {
-                    widgets[3].CollisionBox = new Rectangle(widgets[3].CollisionBox.X + deltaX, widgets[3].CollisionBox.Y + deltaY, widgets[3].CollisionBox.Width, widgets[3].CollisionBox.Height);
-                    widgets[1].CollisionBox = new Rectangle(widgets[3].CollisionBox.X, widgets[1].CollisionBox.Y, widgets[1].CollisionBox.Width, widgets[1].CollisionBox.Height);
-                    widgets[2].CollisionBox = new Rectangle(widgets[2].CollisionBox.X, widgets[3].CollisionBox.Y, widgets[3].CollisionBox.Width, widgets[3].CollisionBox.Height);
-                }
-
-                widgets[4].CollisionBox = new Rectangle((widgets[0].CollisionBox.X + widgets[2].CollisionBox.X) / 2, (widgets[0].CollisionBox.Y + widgets[2].CollisionBox.Y) / 2, 16, 16);
-
-                CollisionBox = new Rectangle(widgets[0].CollisionBox.X + (16/2), widgets[0].CollisionBox.Y + (16/2), widgets[1].CollisionBox.X - widgets[0].CollisionBox.X, widgets[2].CollisionBox.Y - widgets[0].CollisionBox.Y);
+                x = x + deltaX;
+                W = W - deltaX;
+            }
+            else if (calcType.Contains("2")) W = W + deltaX; 
+            else H = H + deltaY;
+            if (calcType.Contains("a"))
+            {
+                y = y + deltaY;
+                H = H - deltaY;
+            }
+            else if (calcType.Contains("b")) H = H + deltaY; 
+            else W = W + deltaX;
+            // Fix for inverted image
+            if (W <= 0 && calcType.Contains("1")) calcType = calcType.Replace('1', '2');
+            else if (W <= 0 && calcType.Contains("2")) calcType = calcType.Replace('2', '1');
+            if (H <= 0 && calcType.Contains("a")) calcType = calcType.Replace('a', 'b');
+            else if (H <= 0 && calcType.Contains("b")) calcType = calcType.Replace('b', 'a');
+            // Set New Dimensions
+            Rectangle NewBox = new Rectangle(x, y, W, H);
+            if (CollisionBox != NewBox)
+            {
+                CollisionBox = NewBox;
+                WidgetUpdate();
             }
         }
     }
